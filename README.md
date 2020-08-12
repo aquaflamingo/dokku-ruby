@@ -1,6 +1,6 @@
 # Dokku::Ruby
 
-Small [Dokku](https://github.com/dokku/dokku) API for Ruby over SSH
+Small [Dokku](https://github.com/dokku/dokku) API for Ruby over SSH.
 
 ## Installation
 
@@ -20,6 +20,8 @@ Or install it yourself as:
 
 ## Usage
 
+**WARNING: Please be careful and ensure that you trust the input you pass to the session. It uses pure [`.exec!`](https://github.com/robertsimoes/dokku-ruby/blob/ad3374d8d467b870fb99538370b43468cde74e71/lib/dokku/session.rb#L15) so there is definetly an opportunity for nefarious command injection** 
+
 Start a Dokku Session:
 ```
 ssh = Dokku::SSH.new(
@@ -36,7 +38,7 @@ ssh.start do |session|
 	env = { env_var_one: '123', env_var_two: '456' }
 	
 	# Create a new Dokku application on the server
-  session.create(app_name: 'my-dokku-app')
+	session.create(app_name: 'my-dokku-app')
 
 	# Set the environment config for that application
 	session.set_env_vars(app_name: app_name, env_vars: env)
