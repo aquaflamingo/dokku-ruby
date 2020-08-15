@@ -18,6 +18,7 @@
 
 require 'bundler'
 Bundler.require(:default, :development)
+require 'dokku'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
