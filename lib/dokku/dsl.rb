@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'sshkit/dsl'
+
 module Dokku
   class DSL
     include SSHKit::DSL
@@ -9,6 +11,7 @@ module Dokku
     FORCE_DELETE_APP_CMD = '--force apps:destroy'
 
     def create!(app_name)
+      binding.pry
       execute :dokku, CREATE_APP_CMD, app_name
     end
 

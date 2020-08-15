@@ -29,7 +29,7 @@ module Dokku
 
   class DokkuError < StandardError; end
   class MissingUserError < DokkuError; end
-  class MissingUserError < DokkuError; end
+  class MissingHostError < DokkuError; end
 
   def self.start_session!
     on ssh_target do
@@ -37,9 +37,7 @@ module Dokku
     end
   end
 
-  private
-
-  def ssh_target
+  def self.ssh_target
     user = configuration.user
     host = configuration.host
 
