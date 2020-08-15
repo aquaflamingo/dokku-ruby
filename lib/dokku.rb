@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
+require 'sshkit'
+require 'sshkit/dsl'
 require 'dokku/version'
 require 'dokku/configuration'
 require 'dokku/dsl'
-require 'sshkit'
-require 'sshkit/dsl'
 
 module Dokku
-  include SSHKit::DSL
+  extend SSHKit::DSL
 
   class << self
     attr_writer :configuration
@@ -33,7 +33,8 @@ module Dokku
 
   def self.start_session!
     on ssh_target do
-      yield Dokku::DSL.new
+      # self is an SSH context
+      yield Dokku::DSL.new(self)
     end
   end
 
